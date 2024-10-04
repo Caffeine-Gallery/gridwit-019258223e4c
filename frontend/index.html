@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML5 Crossword Puzzle</title>
     <style>
-        /* Embedded CSS */
         .html5-crossword{-webkit-tap-highlight-color:transparent;-webkit-border-radius:5px 5px 0 0;-moz-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;-webkit-box-shadow:0 0 5px rgba(0,0,0,.5);-moz-box-shadow:0 0 5px rgba(0,0,0,.5);box-shadow:0 0 5px rgba(0,0,0,.5);display:inline-block;font-family:Helvetica,Arial,sans-serif;overflow:hidden}.html5-crossword *{padding:0;margin:0}.html5-crossword-clue2.hide{left:-100%}.html5-crossword-clue2{position:absolute;z-index:10000;width:100%;top:0;left:0;padding:5px 10px;background:rgba(0,0,0,.8);color:#fff;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-webkit-transition:left .3s ease-out;-moz-transition:left .3s ease-out;-o-transition:left .3s ease-out;transition:left .3s ease-out}.html5-crossword article{background-color:#999;background-image:-webkit-gradient(linear,left top,left bottom,from(#ccc),to(#999));background-image:-webkit-linear-gradient(top,#ccc,#999);background-image:-moz-linear-gradient(top,#ccc,#999);background-image:-ms-linear-gradient(top,#ccc,#999);background-image:-o-linear-gradient(top,#ccc,#999);background-image:linear-gradient(top,#ccc,#999);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#cccccc', EndColorStr='#999999');color:#222;font-size:1em;height:4em;padding:8px 30px 8px 8px;position:relative;text-align:left;text-shadow:0 1px 0 #bbb}.html5-crossword article button{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;background:url(https://raw.githubusercontent.com/sanex3339/javascript-dg7cgp/master/gear.png) no-repeat center #efefef;border:1px solid #999;cursor:pointer;display:block;height:24px;outline:0;position:absolute;right:3px;top:3px;text-indent:-10000px;width:24px}.html5-crossword article button:active{background:url(https://raw.githubusercontent.com/sanex3339/javascript-dg7cgp/master/gear.png) no-repeat center #aaa}.html5-crossword canvas{-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;background:#ddd;left:0;position:absolute;top:0;z-index:400}.html5-crossword nav button.active{background:#999;color:#333;text-shadow:0 1px 0 #ddd}.html5-crossword .html5-crossword-board{-webkit-perspective:1000px;-moz-perspective:1000px;perspective:1000px;overflow:hidden;position:relative;text-align:center}.html5-crossword-overlay{position:absolute;bottom:0;left:0;right:0;top:0;background:#000;-webkit-transform:translate3d(0,0,-100px);-moz-transform:translate3d(0,0,-100px);-ms-transform:translate3d(0,0,-100px);-o-transform:translate3d(0,0,-100px);transform:translate3d(0,0,-100px);opacity:0;filter:alpha(opacity=0);-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out}.show-modal .html5-crossword-overlay,.show-options .html5-crossword-overlay{-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0);cursor:pointer;z-index:550}.html5-crossword-options{-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;-webkit-box-shadow:0 0 10px #000;-moz-box-shadow:0 0 10px #000;box-shadow:0 0 10px #000;display:inline-block;opacity:0;filter:alpha(opacity=0);-webkit-transform:translate3d(0,0,-100px);-moz-transform:translate3d(0,0,-100px);-ms-transform:translate3d(0,0,-100px);-o-transform:translate3d(0,0,-100px);transform:translate3d(0,0,-100px);-webkit-transition:all .3s ease-out;-moz-transition:all .3s ease-out;-o-transition:all .3s ease-out;transition:all .3s ease-out;background:rgba(0,0,0,.95);position:relative;margin-top:10px;width:300px;z-index:1}.html5-crossword-options ul li{color:#fff;list-style:none;width:100%}.html5-crossword-options ul li button{-webkit-transition:all .2s ease-in;-moz-transition:all .2s ease-in;-o-transition:all .2s ease-in;transition:all .2s ease-in;background:0;border:0;color:#fff;cursor:pointer;font-size:16px;font-weight:700;outline:0;padding:10px;width:100%}.html5-crossword-options ul li button:hover{background:rgba(100,100,100,.1)}.show-modal .html5-crossword-options{color:#fff}.show-modal .html5-crossword-options ul,.show-options .html5-crossword-modal{display:none}.show-modal .html5-crossword-modal{display:block}.show-modal .html5-crossword-modal p{padding:20px;color:#fff}.show-modal .html5-crossword-modal h3{padding:5px}.html5-crossword-options .html5-crossword-confirm{height:0}.html5-crossword-options .html5-crossword-confirm button{-webkit-transition:all .2s ease-out;-moz-transition:all .2s ease-out;-o-transition:all .2s ease-out;transition:all .2s ease-out;height:0;opacity:0;padding:0;width:50%;float:left}.html5-crossword-options .html5-crossword-confirm .html5-crossword-yes{background:rgba(255,0,0,.1)}.html5-crossword-options .html5-crossword-confirm .html5-crossword-no{background:rgba(0,255,0,.1)}.html5-crossword-options .html5-crossword-confirm .html5-crossword-no:hover{background:rgba(0,255,0,.2)}.html5-crossword-options .html5-crossword-confirm .html5-crossword-yes:hover{background:rgba(255,0,0,.2)}.html5-crossword-board.confirm .html5-crossword-confirm button{height:auto;padding:10px;opacity:1}.show-modal .html5-crossword-modal,.show-options .html5-crossword-options{opacity:1;z-index:600;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
     </style>
 </head>
@@ -19,10 +18,11 @@
     </div>
 
     <script>
-        // Embedded JavaScript (combined from Crossword.js, Board.js, and Ui.js)
         (function(){
             "use strict";
             var game = window.game || {};
+            var APPNAME = "html5-crossword";
+            var uuid = 0;
 
             // Utility functions
             game.$ = {
@@ -132,6 +132,46 @@
                 }
             };
 
+            // MobileKeyboardEvents constructor
+            function MobileKeyboardEvents(container) {
+                this.container = container;
+                this.input = document.createElement('input');
+                this.input.type = 'text';
+                this.input.style.position = 'absolute';
+                this.input.style.top = '-1000px';
+                this.container.appendChild(this.input);
+                this.isOpen = function() { return document.activeElement === this.input; };
+                this.open = function() { this.input.focus(); };
+                this.close = function() { this.input.blur(); };
+                this.setText = function(text) { this.input.value = text; };
+                this.input.addEventListener('input', this.handleInput.bind(this));
+            }
+
+            game.EventEmitter.mixin(MobileKeyboardEvents.prototype);
+
+            MobileKeyboardEvents.prototype.handleInput = function(event) {
+                this.emit('key', { string: this.input.value, BACKSPACE: event.inputType === 'deleteContentBackward' });
+            };
+
+            // PointerTracker constructor
+            function PointerTracker(element, input) {
+                this.element = element;
+                this._pos = { x: 0, y: 0 };
+                this.input = input;
+                this.element.addEventListener('mousedown', this.handleStart.bind(this));
+                this.element.addEventListener('touchstart', this.handleStart.bind(this));
+            }
+
+            game.EventEmitter.mixin(PointerTracker.prototype);
+
+            PointerTracker.prototype.handleStart = function(event) {
+                event.preventDefault();
+                var touch = event.touches ? event.touches[0] : event;
+                this._pos.x = touch.clientX;
+                this._pos.y = touch.clientY;
+                this.emit('down', { start: this._pos, isTouch: !!event.touches });
+            };
+
             // Crossword constructor
             function Crossword(options) {
                 this.options = options;
@@ -163,7 +203,78 @@
                 this.createBoard(options.words);
             }
 
-            // ... (rest of the Crossword prototype methods)
+            Crossword.prototype.createBoard = function(words) {
+                var self = this;
+                new game.Board({
+                    words: game.$.values(words),
+                    size: this.options.size,
+                    callback: function(board, words) {
+                        self.solution = board;
+                        self.board    = game.$.cloneBoard(board);
+                        self.clues    = self.getClues(words);
+                        self.width    = board.width  || self.options.size;
+                        self.height   = board.height || self.options.size;
+                        resize.call(self);
+                    }
+                });
+            }
+
+            Crossword.prototype.pointerHandler = function (points){
+                game.IS_MOBILE = isMobile = points.isTouch;
+
+                var start = points.start,
+                    ty    = this.getTranslation(),
+                    col   = (start.x - PADDING) / this.CELL_SIZE | 0,
+                    row   = (start.y - PADDING + ty) / this.CELL_SIZE | 0;
+
+                if (! this.cellExists(col, row)) {
+                    return this.keyboard.close();
+                }
+
+                if (this.__finish){
+                    this.col = col;
+                    this.row = row;
+                    this.highlightSelection();
+                    drawBoard.call(this);
+                    return;
+                }
+                this.keyboard.open();
+                if (game.IS_MOBILE) {
+                    window.scrollTo(this.pointer._pos.x, this.pointer._pos.y-60);
+                    this.keyboard.input.style.paddingTop = (this.getTranslation())+"px";
+                }
+                this.startTracking(col, row);
+            }
+
+            Crossword.prototype.keyboarHandler = function (event){
+                if (this.__finish) return;
+
+                var chars = game.$.splitString((event.string || "").toUpperCase()),
+                    len   = chars.length,
+                    text  = [];
+
+                this.clearText();
+
+                text = this.insertChars(chars);
+                
+                if (IS_ROMAN && event.BACKSPACE && len > text.length) {
+                    this.getCurrentCell().char = "";
+                    this.keyboard.setText(text.join(""));
+                }
+
+                this.highlightSelection(true);
+                drawBoard.call(this);
+
+                if (this.isSolved()) {
+                    this.ui.hideClue();
+                    this.ui.showModal({
+                        title: "Congratulations",
+                        message: this.options.congratMsg.replace("{time}",
+                                game.$.format((new Date).getTime() - this.__start))
+                    });
+                    this.__finish = true;
+                }
+            }
 
             // UI constructor
             function UI(container) {
@@ -173,9 +284,9 @@
                 container.innerHTML = template(this.id);
 
                 this.canvas = container.getElementsByTagName("canvas")[0];
-                this.clueE = this.getElement("clue");
-                this.clue2 = this.getElement("clue2");
-                this.board = this.getElement("board");
+                this.clueE  = this.getElement("clue");
+                this.clue2  = this.getElement("clue2");
+                this.board  = this.getElement("board");
 
                 var toggleOptions = game.$.bind(this.toggleOptions, this);
                 this.on("toggle-options", toggleOptions);
@@ -191,7 +302,77 @@
 
             game.EventEmitter.mixin(UI.prototype);
 
-            // ... (rest of the UI prototype methods)
+            UI.prototype.getElement = function(partialId) {
+                return game.$.$("html5-crossword-"+partialId+"-"+this.id);
+            };
+
+            UI.prototype.getCanvas = function() {
+                return this.canvas;
+            };
+
+            UI.prototype.changeClue = function(clue) {
+                this.clueE.innerHTML = clue;
+                this.clue2.innerHTML = clue;
+                if (game.IS_MOBILE) {
+                    var self = this;
+                    setTimeout(function(){
+                        game.$.removeClass(self.clue2, "hide");
+                    }, 1000);
+                }
+            };
+
+            UI.prototype.hideClue = function() {
+                game.$.addClass(this.clue2, "hide");
+            }
+
+            UI.prototype.toggleOptions = function() {
+                var self = this;
+                game.$.toggleClass(this.board, "show-options");
+                if (game.$.hasClass(this.board, "show-modal"))
+                setTimeout(function(){
+                    game.$.removeClass(self.board, "show-modal");
+                }, 1000);
+
+                setTimeout(function(){
+                    game.$.removeClass(self.board, "confirm");
+                }, 600);
+            };
+
+            UI.prototype.getBoard = function() {
+                return this.board;
+            };
+
+            UI.prototype.setSize = function(size) {
+                this.canvas.width  = size;
+                this.canvas.height = size;
+                this.board.style.width  = size + "px";
+                this.board.style.height = size + "px";
+                this.container.style.width = size + "px";
+            };
+
+            UI.prototype.showModal = function(options) {
+                var tag, text = modalTemplate;
+
+                for (var tag in options) {
+                    if (options.hasOwnProperty(tag))
+                        text = text.replace('{'+tag+'}', options[tag]);
+                }
+
+                this.getElement("modal").innerHTML = text;
+
+                this.toggleOptions();
+                game.$.addClass(this.board, "show-modal");
+            }
+
+            function initEvents(self) {
+                self.container.addEventListener("click", function(event){
+                    var customEvent = event.target.getAttribute("data-cevent");
+                    if (customEvent) {
+                        event.preventDefault();
+                        self.emit(customEvent);
+                    }
+                });
+            }
 
             // Board constructor
             function Board(options) {
@@ -204,7 +385,109 @@
                 this.createBoard();
             }
 
-            // ... (rest of the Board prototype methods)
+            Board.prototype.createBoard = function() {
+                var words = this.words.slice().sort(function(a, b){
+                    return b.length - a.length;
+                });
+
+                for (var i = 0; i < words.length; i++) {
+                    this.placeWord(words[i]);
+                }
+
+                this.trimBoard();
+                this.callback(this.board, this.wordsUsed);
+            }
+
+            Board.prototype.placeWord = function(word) {
+                var directions = [
+                    {x: 1, y: 0},  // horizontal
+                    {x: 0, y: 1}   // vertical
+                ];
+
+                for (var i = 0; i < directions.length; i++) {
+                    var direction = directions[i];
+                    var placed = this.tryPlaceWord(word, direction);
+                    if (placed) return true;
+                }
+
+                return false;
+            }
+
+            Board.prototype.tryPlaceWord = function(word, direction) {
+                for (var y = 0; y < this.size; y++) {
+                    for (var x = 0; x < this.size; x++) {
+                        if (this.canPlaceWordAt(word, x, y, direction)) {
+                            this.placeWordAt(word, x, y, direction);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            Board.prototype.canPlaceWordAt = function(word, x, y, direction) {
+                var curX = x, curY = y;
+                for (var i = 0; i < word.length; i++) {
+                    if (curX < 0 || curX >= this.size || curY < 0 || curY >= this.size) {
+                        return false;
+                    }
+                    var cell = this.board[curY] && this.board[curY][curX];
+                    if (cell && cell.char !== word[i]) {
+                        return false;
+                    }
+                    curX += direction.x;
+                    curY += direction.y;
+                }
+                return true;
+            }
+
+            Board.prototype.placeWordAt = function(word, x, y, direction) {
+                var curX = x, curY = y;
+                for (var i = 0; i < word.length; i++) {
+                    if (!this.board[curY]) this.board[curY] = {};
+                    this.board[curY][curX] = {char: word[i]};
+                    curX += direction.x;
+                    curY += direction.y;
+                }
+                this.wordsUsed.push({word: word, x: x, y: y, dir: direction.x ? 0 : 1});
+            }
+
+            Board.prototype.trimBoard = function() {
+                var minX = this.size, minY = this.size, maxX = 0, maxY = 0;
+
+                for (var y in this.board) {
+                    for (var x in this.board[y]) {
+                        minX = Math.min(minX, parseInt(x));
+                        minY = Math.min(minY, parseInt(y));
+                        maxX = Math.max(maxX, parseInt(x));
+                        maxY = Math.max(maxY, parseInt(y));
+                    }
+                }
+
+                var trimmedBoard = {};
+                for (var y = minY; y <= maxY; y++) {
+                    trimmedBoard[y - minY] = {};
+                    for (var x = minX; x <= maxX; x++) {
+                        if (this.board[y] && this.board[y][x]) {
+                            trimmedBoard[y - minY][x - minX] = this.board[y][x];
+                        }
+                    }
+                }
+
+                this.board = trimmedBoard;
+                this.board.width = maxX - minX + 1;
+                this.board.height = maxY - minY + 1;
+
+                // Adjust word positions
+                for (var i = 0; i < this.wordsUsed.length; i++) {
+                    this.wordsUsed[i].x -= minX;
+                    this.wordsUsed[i].y -= minY;
+                }
+            }
+
+            game.Board = Board;
+            game.UI = UI;
+            game.Crossword = Crossword;
 
             // Initialize the game
             var container = document.querySelector('crossword');
