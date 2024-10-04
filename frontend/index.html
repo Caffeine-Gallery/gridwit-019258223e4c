@@ -23,6 +23,9 @@
             var game = window.game || {};
             var APPNAME = "html5-crossword";
             var uuid = 0;
+            var isMobile = false;
+            var IS_ROMAN = false;
+            var PADDING = 10;
 
             // Utility functions
             game.$ = {
@@ -172,110 +175,6 @@
                 this.emit('down', { start: this._pos, isTouch: !!event.touches });
             };
 
-            // Crossword constructor
-            function Crossword(options) {
-                this.options = options;
-                this.ui = new game.UI(options.container);
-                this.keyboard = new MobileKeyboardEvents(this.ui.getBoard());
-                this.pointer = new PointerTracker(this.ui.canvas, this.keyboard.input);
-
-                this.options.congratMsg = options.container.getAttribute("msg") || "You solved it in {time}";
-                
-                this.keyboard.on("close", game.$.bind(function(){
-                    this.ui.hideClue();
-                    this.keyboard.input.style.paddingTop = 0;
-                    this.clearLastSelection();
-                    drawBoard.call(this);
-                }, this));
-
-                game.$.bindAll(this, "pointerHandler", "keyboarHandler", "keydownHandler", "solve");
-
-                this.pointer.on('down', this.pointerHandler);
-                this.keyboard.on('key', this.keyboarHandler);
-                this.keyboard.input.addEventListener("keydown", this.keydownHandler);
-                window.addEventListener("resize", this.resize);
-                this.ui.on('solve', this.solve);
-
-                if (options.board) {
-                    this.board = options.board;
-                    return;
-                }
-                this.createBoard(options.words);
-            }
-
-            Crossword.prototype.createBoard = function(words) {
-                var self = this;
-                new game.Board({
-                    words: game.$.values(words),
-                    size: this.options.size,
-                    callback: function(board, words) {
-                        self.solution = board;
-                        self.board    = game.$.cloneBoard(board);
-                        self.clues    = self.getClues(words);
-                        self.width    = board.width  || self.options.size;
-                        self.height   = board.height || self.options.size;
-                        resize.call(self);
-                    }
-                });
-            }
-
-            Crossword.prototype.pointerHandler = function (points){
-                game.IS_MOBILE = isMobile = points.isTouch;
-
-                var start = points.start,
-                    ty    = this.getTranslation(),
-                    col   = (start.x - PADDING) / this.CELL_SIZE | 0,
-                    row   = (start.y - PADDING + ty) / this.CELL_SIZE | 0;
-
-                if (! this.cellExists(col, row)) {
-                    return this.keyboard.close();
-                }
-
-                if (this.__finish){
-                    this.col = col;
-                    this.row = row;
-                    this.highlightSelection();
-                    drawBoard.call(this);
-                    return;
-                }
-                this.keyboard.open();
-                if (game.IS_MOBILE) {
-                    window.scrollTo(this.pointer._pos.x, this.pointer._pos.y-60);
-                    this.keyboard.input.style.paddingTop = (this.getTranslation())+"px";
-                }
-                this.startTracking(col, row);
-            }
-
-            Crossword.prototype.keyboarHandler = function (event){
-                if (this.__finish) return;
-
-                var chars = game.$.splitString((event.string || "").toUpperCase()),
-                    len   = chars.length,
-                    text  = [];
-
-                this.clearText();
-
-                text = this.insertChars(chars);
-                
-                if (IS_ROMAN && event.BACKSPACE && len > text.length) {
-                    this.getCurrentCell().char = "";
-                    this.keyboard.setText(text.join(""));
-                }
-
-                this.highlightSelection(true);
-                drawBoard.call(this);
-
-                if (this.isSolved()) {
-                    this.ui.hideClue();
-                    this.ui.showModal({
-                        title: "Congratulations",
-                        message: this.options.congratMsg.replace("{time}",
-                                game.$.format((new Date).getTime() - this.__start))
-                    });
-                    this.__finish = true;
-                }
-            }
-
             // UI constructor
             function UI(container) {
                 this.id = ++uuid;
@@ -313,7 +212,7 @@
             UI.prototype.changeClue = function(clue) {
                 this.clueE.innerHTML = clue;
                 this.clue2.innerHTML = clue;
-                if (game.IS_MOBILE) {
+                if (isMobile) {
                     var self = this;
                     setTimeout(function(){
                         game.$.removeClass(self.clue2, "hide");
@@ -372,6 +271,110 @@
                         self.emit(customEvent);
                     }
                 });
+            }
+
+            // Crossword constructor
+            function Crossword(options) {
+                this.options = options;
+                this.ui = new UI(options.container);
+                this.keyboard = new MobileKeyboardEvents(this.ui.getBoard());
+                this.pointer = new PointerTracker(this.ui.canvas, this.keyboard.input);
+
+                this.options.congratMsg = options.container.getAttribute("msg") || "You solved it in {time}";
+                
+                this.keyboard.on("close", game.$.bind(function(){
+                    this.ui.hideClue();
+                    this.keyboard.input.style.paddingTop = 0;
+                    this.clearLastSelection();
+                    drawBoard.call(this);
+                }, this));
+
+                game.$.bindAll(this, "pointerHandler", "keyboarHandler", "keydownHandler", "solve");
+
+                this.pointer.on('down', this.pointerHandler);
+                this.keyboard.on('key', this.keyboarHandler);
+                this.keyboard.input.addEventListener("keydown", this.keydownHandler);
+                window.addEventListener("resize", this.resize);
+                this.ui.on('solve', this.solve);
+
+                if (options.board) {
+                    this.board = options.board;
+                    return;
+                }
+                this.createBoard(options.words);
+            }
+
+            Crossword.prototype.createBoard = function(words) {
+                var self = this;
+                new Board({
+                    words: game.$.values(words),
+                    size: this.options.size,
+                    callback: function(board, words) {
+                        self.solution = board;
+                        self.board    = game.$.cloneBoard(board);
+                        self.clues    = self.getClues(words);
+                        self.width    = board.width  || self.options.size;
+                        self.height   = board.height || self.options.size;
+                        resize.call(self);
+                    }
+                });
+            }
+
+            Crossword.prototype.pointerHandler = function (points){
+                isMobile = points.isTouch;
+
+                var start = points.start,
+                    ty    = this.getTranslation(),
+                    col   = (start.x - PADDING) / this.CELL_SIZE | 0,
+                    row   = (start.y - PADDING + ty) / this.CELL_SIZE | 0;
+
+                if (! this.cellExists(col, row)) {
+                    return this.keyboard.close();
+                }
+
+                if (this.__finish){
+                    this.col = col;
+                    this.row = row;
+                    this.highlightSelection();
+                    drawBoard.call(this);
+                    return;
+                }
+                this.keyboard.open();
+                if (isMobile) {
+                    window.scrollTo(this.pointer._pos.x, this.pointer._pos.y-60);
+                    this.keyboard.input.style.paddingTop = (this.getTranslation())+"px";
+                }
+                this.startTracking(col, row);
+            }
+
+            Crossword.prototype.keyboarHandler = function (event){
+                if (this.__finish) return;
+
+                var chars = game.$.splitString((event.string || "").toUpperCase()),
+                    len   = chars.length,
+                    text  = [];
+
+                this.clearText();
+
+                text = this.insertChars(chars);
+                
+                if (IS_ROMAN && event.BACKSPACE && len > text.length) {
+                    this.getCurrentCell().char = "";
+                    this.keyboard.setText(text.join(""));
+                }
+
+                this.highlightSelection(true);
+                drawBoard.call(this);
+
+                if (this.isSolved()) {
+                    this.ui.hideClue();
+                    this.ui.showModal({
+                        title: "Congratulations",
+                        message: this.options.congratMsg.replace("{time}",
+                                game.$.format((new Date).getTime() - this.__start))
+                    });
+                    this.__finish = true;
+                }
             }
 
             // Board constructor
