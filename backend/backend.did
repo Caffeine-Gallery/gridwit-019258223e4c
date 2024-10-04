@@ -1,0 +1,16 @@
+type Puzzle = 
+ record {
+   acrossClues: vec record {
+                      nat;
+                      text;
+                    };
+   downClues: vec record {
+                    nat;
+                    text;
+                  };
+   grid: vec vec opt nat32;
+ };
+service : {
+  checkSolution: (vec vec opt nat32) -> (bool) query;
+  getRandomPuzzle: () -> (Puzzle);
+}
